@@ -1,0 +1,11 @@
+{
+  "name": "onlineproducts",
+  "version": "1.0.0",
+  "description": "online platform for Retail Buyer",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "suraj",
+  "license": "ISC"
+}
