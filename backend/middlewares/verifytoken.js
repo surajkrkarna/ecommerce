@@ -1,7 +1,6 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { userModel } = require('../models');
-
 
 const fetchData = async (req, res, next) => {
     const data = req.body;
@@ -10,35 +9,37 @@ const fetchData = async (req, res, next) => {
     next();
 }
 
-
 const signUser = async (req, res, next) => {
     const { body } = req;
     console.log(body);
+    try {
+        const userdata = await userModel.findOne({ username: body.username });
 
-    const userdata = await userModel.findOne({ username: body.username });
+        if (bcrypt.compareSync(body.password, userdata.password)) {
+            jwt.sign({ body }, "mykey", { expiresIn: 3000 }, (err, token,) => {
+                if (!err) {
+                    res.token = token;
+                } else {
+                    res.token = err
+                }
+            })
 
-    if (bcrypt.compareSync(body.password, userdata.password)) {
-        jwt.sign({ body }, "mykey", { expiresIn: 30 }, (err, token,) => {
-            if (!err) {
-                res.token = token;
-            } else {
-                res.token = err
-            }
-        })
-
-
-        jwt.sign({ body }, "mykey", (err, token) => {
-            if (!err) {
-                res.reftoken = token;
-            } else {
-                res.reftoken = err;
-            }
-            next();
-        })
+            jwt.sign({ body }, "mykey", (err, token) => {
+                if (!err) {
+                    res.reftoken = token;
+                } else {
+                    res.reftoken = err;
+                }
+                next();
+            })
+        }
+        else {
+            res.sendStatus(404).json({ message: 'Password Incorrect' })
+        }
+    } catch (error) {
+        res.json({ message: 'Password or Username not matched!' })
     }
-    else {
-        alert('Username or Password is incorrect');
-    }
+
 }
 
 

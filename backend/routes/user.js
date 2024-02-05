@@ -10,6 +10,7 @@ Router.post('/api', verifytoken, userController.rone)
 Router.post('/api/login', signUser, userController.login)
 Router.post('/api/regenerate', verifytoken, userController.regeneratetoken)
 Router.post('/api/register', userController.register);
+Router.get('/api/password', userController.showPassword)
 
 Router.post('/api/protected', fetchData, userController.rtwo)
 module.exports = {
