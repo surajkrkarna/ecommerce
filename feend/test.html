@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Property</title>
+    <link rel="stylesheet" type="text/css" href="./src/output.css">
+    <style>
+    
+        .wrapper{
+           display: inline-block;
+           text-align: center;
+           float: right;
+        }
+        header{
+            width: auto;
+            margin: 10px;
+            text-align: center;
+        }
+        img {
+            width:100px;
+            height:100px;
+            border-radius: 50px;
+        }
+        h3{
+            margin: 0px;
+
+        }
+        p{
+            margin: 0px;
+        }
+        h6{
+            margin: 0px;
+        }
+      @media screen and (max-width:309px){
+        header{
+            background-color: grey;
+            width: auto;
+            margin: 10px;
+        } 
+        h3{
+            color: green;
+        }
+      }
+      .box{
+        border: 2px solid red;
+        display: inline-block;
+        margin: 5px;
+        width: 280px;
+        height: 200px;
+        justify-content: center;
+      }
+
+
+      @media screen and (max-width:418px) and (min-width:899px){
+            .boxwrap{
+                display: flex;
+                height: auto;
+            }
+            .box{
+                height: 300px;
+                overflow: scroll;
+                width: 200px;
+            }
+      }
+    </style>
+
+</head>
+<body class="text-red-700">
+    <div class="wrapper">
+    <header class="top">
+        <img src="https://images.pexels.com/photos/1666779/pexels-photo-1666779.jpeg?cs=srgb&dl=pexels-tom%C3%A9-louro-1666779.jpg&fm=jpg" alt="ProfilePic">
+        <h3>Welcome To My Blog</h3>
+        <h6>This is the website where your url ends</h6>
+    </header>
+</div>
+<div class="boxwrap">
+<div class="box">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem harum consequuntur consectetur excepturi id maxime, blanditiis delectus rerum, eum ad cupiditate fugiat voluptate non, tenetur modi. Sunt pariatur fuga ab.
+</div>
+<div class="box">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem harum consequuntur consectetur excepturi id maxime, blanditiis delectus rerum, eum ad cupiditate fugiat voluptate non, tenetur modi. Sunt pariatur fuga ab.
+</div>
+<div class="box">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem harum consequuntur consectetur excepturi id maxime, blanditiis delectus rerum, eum ad cupiditate fugiat voluptate non, tenetur modi. Sunt pariatur fuga ab.
+</div>
+<div class="box">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem harum consequuntur consectetur excepturi id maxime, blanditiis delectus rerum, eum ad cupiditate fugiat voluptate non, tenetur modi. Sunt pariatur fuga ab.
+</div>
+</div>
+<div class="uppercase p-4 border-b ">
+    hye
+    <h2>I'm testing tailwind classes</h2>
+</div>
+</body>
+</html>
