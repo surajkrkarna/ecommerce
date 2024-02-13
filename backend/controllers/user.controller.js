@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 const { registerUser } = require('../Users/storeUsers');
 const { userModel } = require('../models')
 const crypto = require('crypto-js');
@@ -58,6 +59,26 @@ const userController = {
                 console.log(password)
             }
         })
+    },
+
+    uploadImg: (req, res) => {
+        const uploadedFile = req.body.image;
+        res.json({ message: 'File uploaded successfully', file: uploadedFile });
+    },
+
+    fetchImg: (req, res) => {
+        // Assuming you have a user-specific folder structure
+        const userFolder = `./uploads/${req.params.userId}`;
+
+        fs.readdir(userFolder, (err, files) => {
+            if (err) {
+                console.error('Error reading user images:', err);
+                res.status(500).json({ error: 'Internal Server Error' });
+            } else {
+                const imageUrls = files.map((file) => `/uploads/${req.params.userId}/${file}`);
+                res.json({ imageUrls });
+            }
+        });
     }
 }
 

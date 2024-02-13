@@ -14,6 +14,11 @@ const signUser = async (req, res, next) => {
     console.log(body);
     try {
         const userdata = await userModel.findOne({ username: body.username });
+        console.log(userdata)
+
+        if (!userdata) {
+            throw new Error('No user found')
+        }
 
         if (bcrypt.compareSync(body.password, userdata.password)) {
             jwt.sign({ body }, "mykey", { expiresIn: 3000 }, (err, token,) => {
@@ -34,12 +39,12 @@ const signUser = async (req, res, next) => {
             })
         }
         else {
-            res.sendStatus(404).json({ message: 'Password Incorrect' })
+            res.send('Password Incorrect')
         }
     } catch (error) {
-        res.json({ message: 'Password or Username not matched!' })
+        console.log('exception caught')
+        res.send('Password or Username not matched!')
     }
-
 }
 
 
@@ -51,7 +56,7 @@ const verifytoken = (req, res, next) => {
         console.log(bearerToken);
         req.token = bearerToken;
     } else {
-        res.sendStatus(403);
+        res.status(403).json({ message: 'Token Invalid' });
     }
     next();
 }

@@ -1,2 +1,3 @@
 const { fetchData, signUser, verifytoken } = require('./verifytoken');
-module.exports = { fetchData, signUser, verifytoken };
+const { upload } = require('./imageuploads');
+module.exports = { fetchData, signUser, verifytoken, upload };
