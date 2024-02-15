@@ -38,5 +38,9 @@ Content-Type: application/json
     "confirmPassword":"anything"
 }
 
+###
+
+GET http://localhost:5006/api/products
+
 
 
