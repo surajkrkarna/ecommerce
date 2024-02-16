@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 function Login() {
     const [formVals, setFormVals] = useState({});
     const [alertVal, setAlertVal] = useState('');
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormVals({ ...formVals, [name]: value })
@@ -22,11 +23,14 @@ function Login() {
                 setAlertVal('Please enter password')
             } else {
                 const response = await axios.post('http://localhost:5006/api/login', formVals);
-                console.log(response);
+                // console.log(response);
                 localStorage.setItem('token', JSON.stringify(response.data));
-                if (response.data.message !== 'Password or Username not matched!')
+                if (response.data.message !== 'Password or Username not matched!') {
                     window.location.href = '/dashboard';
-                setFormVals({})
+                }
+                setFormVals({
+                    username: '', password: ''
+                });
             }
         } catch (error) {
             console.log(error);

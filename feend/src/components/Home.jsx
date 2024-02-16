@@ -4,6 +4,16 @@ import { Link } from 'react-router-dom'
 import { MdCompareArrows } from "react-icons/md";
 function Home() {
   const [isNavbar,setIsNavbar]=useState(false);
+  const [currentResol,setCurrentResol]=useState(window.innerWidth)
+
+useEffect(() => {
+    window.addEventListener('resize', ()=>setCurrentResol(window.innerWidth));
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', ()=>setCurrentResol(window.innerWidth));
+    };
+  }, []);
 
   return (
     // <div style={{ marginTop: '25%', marginLeft: '45%' }}>
@@ -34,9 +44,14 @@ function Home() {
                             <span>Contact</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/products">
+                            <span>Products</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <button onClick={()=>setIsNavbar(!isNavbar)}><MdCompareArrows className='absolute mt-4 top-2 left-44 border-2 bg-red-200'/></button>
+            <button onClick={()=>setIsNavbar(!isNavbar)}>{(currentResol<769)?'':<MdCompareArrows className='absolute mt-4 top-2 md:right-0 border-2 bg-yellow-200'/>}</button>
         </nav>
       </div>:
       <div className='relative'>
@@ -58,9 +73,14 @@ function Home() {
                           <span>C</span>
                       </a>
                   </li>
+                  <li>
+                        <a href="/products">
+                            <span>P</span>
+                        </a>
+                    </li>
               </ul>
           </div>
-          <button onClick={()=>setIsNavbar(!isNavbar)}><MdCompareArrows className='absolute mt-4 top-2 left-24 border-2 bg-red-200'/></button>
+          <button onClick={()=>setIsNavbar(!isNavbar)}>{(currentResol<769)?'':<MdCompareArrows className='absolute mt-4 top-2 right-0 border-2 bg-yellow-200'/>}</button>
       </nav>
     </div>
       }
